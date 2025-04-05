@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Stream</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .heading-container {
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: slideIn 1s forwards;
+        }
+        
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="heading-container">
+        <div class="heading-stream">
+            <h2>USER REGISTERED SUCCESSFULLY</h2>
+        </div>
+        
+        <div class="submit-container">
+            <button type="submit" class="submit-button" id="submitBtn">Next</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+            event.preventDefault();
+            window.location.href = "index.html";
+        });
+    </script>
+</body>
+</html>

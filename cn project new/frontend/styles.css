@@ -1,0 +1,297 @@
+/* General Body Styles */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    background-color: #111222;
+}
+
+/* Main Container */
+.main-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center;
+}
+
+/* Personal Info Section */
+.personal-info {
+    text-align: center;
+    margin-top: 10px;
+    background-color: #bdc0e0;
+    border-radius: 12px;
+    padding: 20px;
+    width: 320px;
+    height: 580px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.personal-info:hover {
+    transform: scale(1.05);
+}
+
+.heading-container {
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.heading-container:hover{
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Heading styling */
+.heading-stream h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Styling the dropdown */
+.choose-stream {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center;
+    width: 100%;
+    margin-top: -30px;
+    margin-bottom: 8px;
+}
+
+.choose-stream h2 {
+    font-size: 18px;
+    margin-top: 10px;
+    color: #333;
+}
+
+.choose-stream select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.choose-stream select:focus {
+    border-color: #007bff;
+}
+
+/* Styling the submit button */
+.submit-container {
+    text-align: center;
+}
+
+.submit-button {
+    color: #ffffff;
+    background-color: #0069d9;
+    font-size: 16px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Input Fields */
+input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+input[type="radio"] {
+    width: auto;
+    cursor: pointer;
+    margin: 0 5px 0 0;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    transition: border 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+    border: 1px solid #007bff;
+}
+
+input[type="radio"] {
+    width: auto;
+    cursor: pointer;
+    margin: 0 5px 0 0;
+}
+
+/* Button Styles */
+.login-button {
+    display: inline-block;
+    margin-top: 20px auto 0;
+    align-items: center;
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #0069d9;
+    font-size: 16px;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.next-page{
+    display: block;
+    margin-top: 10px;
+    align-items: center;
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #0069d9;
+    font-size: 16px;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+
+.next-page:hover, .login-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.signup-button {
+    color: #0069d9;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.signup-button:hover {
+    background-color: lightgrey;
+}
+
+/* Login Container */
+.login-container {
+    transform: scale(1); 
+    will-change: transform, box-shadow; 
+    text-align: center;
+    background-color: #bdc0e0;
+    border-radius: 12px;
+    margin: 0 auto;
+    padding: 25px;
+    width: 320px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.login-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Input Group for Login */
+.input-group {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Upload Section */
+.upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    /* margin-top: -10px; */
+    text-align: left;
+    margin: -10px 0;
+}
+
+/* Strength Meter */
+#strengthMeter {
+    text-align: left;
+    font-size: 14px;
+    margin-top: -10px;
+}
+
+/* Checkbox Group */
+.checkbox-group {
+    text-align: left;
+    margin: 10px 0;
+}
+
+/* Forgot Password Tooltip */
+.forgot-password {
+    position: relative;
+}
+
+.forgot-password::after {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    background-color: #000;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s;
+}
+
+.forgot-password:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.error-message {
+    /* margin-top: -10px;
+    margin-bottom: 10px; */
+    color: red;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-top: 3px;
+    display: block;
+}
+
+input: invalid {
+    border: 2px solid #ff4df4f;
+    background-color: #fff5f5;
+}
+
+input:focus:invalid {
+    outline: none;
+    box-shadow:0.0 5px #ff4d4f;
+}
+
+input: valid{
+    border: 2px solid #4caf50;
+    background-color: #f5fff5;
+}
+
+input:focus:valid {
+    outline: none; 
+    box-shadow: 0 0 5px #4caf50;
+    
+}

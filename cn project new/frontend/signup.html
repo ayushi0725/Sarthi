@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VROM - Signup</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="personal-info">
+            <h2>CREATE PROFILE</h2>
+            <form id="signupForm">
+                <input type="text" id="name" placeholder="Name" required minlength="3" maxlength="20">
+                <span class="error-message" id="nameError"></span>
+                <br>
+                <input type="tel" id="mobileNumber" placeholder="Mobile Number" pattern="^[0-9]{10}$" required>
+                <span class="error-message" id="mobileError"></span>
+                <br>
+                <input type="email" id="email" placeholder="Email" required>
+                <span class="error-message" id="emailError"></span>
+                <br>
+                <input type="password" id="signupPassword" placeholder="Enter Password" 
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$"
+                title="Password must be 8-20 characters long, contain uppercase and lowercase letters, a number, and a special character."
+                required>
+                <span class="error-message" id="passwordError"></span>
+                <br>
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                <span class="error-message" id="confirmPasswordError"></span>
+                <br>
+                <label>Gender:</label>
+                <input type="radio" value="Male" name="gender" id="genderMale">Male 
+                <input type="radio" value="Female" name="gender" id="genderFemale">Female 
+                <input type="radio" value="Other" name="gender" id="genderOther">Other
+                <span class="error-message" id="genderError"></span>
+                <br><br>
+                <div class="choose-stream">
+                    <h2>Choose Your Stream</h2>
+                    <select id = "streamSelect" name="choose_stream">
+                        <option value="" disabled selected>Select</option>
+                        <option value="Student">Student</option>
+                        <option value="Counsellor">Counsellor</option>
+                        <option value="Community">Community</option>
+                    </select>
+                    <span class="error-message" id="streamError"></span>
+                </div>
+            </form>
+        </div>
+        <button type="button" class="next-page" id="nextBtn">Next</button>
+    </div>
+
+    <script src="validation.js" defer></script>
+</body>
+</html>

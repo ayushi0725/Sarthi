@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VROM - Login</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to the combined CSS file -->
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+
+            <div class="input-group">
+                <input type="email" id="loginEmail" placeholder="Email" required>
+                <span id="loginEmailError" class="error-message"></span>
+                <div>
+                    <input type="password" id="loginPassword" placeholder="Password" required>
+                    <span id="togglePassword" style="cursor: pointer;">&#128065;</span>
+                    <span id="loginPasswordError" class="error-message"></span>
+                </div>
+            </div>
+            <button id="loginBtn" type="submit" class="login-button">Login</button>
+            <span id="loginError" class="error-message"></span>
+        </form>
+        <div>
+            <br/>
+            <a href="#" class="forgot-password">Forgot Password?</a>
+        </div>
+        <h3>New users <a href="signup.html" class="signup-button">Sign up</a></h3>
+    </div>
+    
+    <script src="login.js"></script> 
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sarthi - Home</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <script src="https://unpkg.com/scrollreveal"></script>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo-title">
+        <img class="imo" src="WhatsApp Image 2025-02-24 at 16.02.39_da91a8e6.jpg" alt="Sarthi Logo">
+        <h1 class="main-title">Sarthi</h1>
+      </div>
+      <nav class="menu-bar">
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#help">Help</a></li>
+          <li><a href="signup.html" class="button">Sign Up</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <section class="sec-01">
+    <div class="container">
+      <div class="content">
+        <div class="image">
+          <img src="student.png" alt="Student">
+        </div>
+        <div class="text-box">
+          <h3>Login as Student</h3>
+          <a href="login.html" class="button">Login</a>
+          <p>Access your study materials, assignments, and connect with mentors.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="sec-02">
+    <div class="container">
+      <div class="content">
+        <div class="image">
+          <img src="com.jpg" alt="Community">
+        </div>
+        <div class="text-box">
+          <h3>Login as Community</h3>
+          <a href="login.html" class="button">Login</a>
+          <p>Join discussions, share knowledge, and collaborate with peers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="sec-03">
+    <div class="container">
+      <div class="content">
+        <div class="image">
+          <img src="teacher.png" alt="Counseler">
+        </div>
+        <div class="text-box">
+          <h3>Login as Teacher</h3>
+          <a href="login.html" class="button">Login</a>
+          <p>Manage courses, interact with students, and track progress efficiently.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <footer>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+    <p>&copy; 2025 Sarthi. All Rights Reserved.</p>
+  </footer>
+  
+  <script>
+    ScrollReveal({ distance:'60px', duration:2500, delay:400 });
+    ScrollReveal().reveal('.main-title, .logo-title', { delay:500, origin:'left' });
+    ScrollReveal().reveal('.text-box', { delay:700, origin:'right' });
+    ScrollReveal().reveal('.social-icons a', { delay:500, origin:'bottom', interval:200 });
+  </script>
+</body>
+</html>
