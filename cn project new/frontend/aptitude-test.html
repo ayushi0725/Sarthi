@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Career Aptitude Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #111222;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            text-align: center;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .question {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+
+        button {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            border: none;
+            padding: 12px 20px;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 20px auto 0;
+            transition: transform 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .test-result {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Career Aptitude Test</h2>
+        <form id="aptitudeTestForm">
+            <div class="question">
+                <p>1. What do you enjoy more?</p>
+                <label><input type="radio" name="q1" value="a"> Solving math problems</label>
+                <label><input type="radio" name="q1" value="b"> Drawing or painting</label>
+            </div>
+            <div class="question">
+                <p>2. You would prefer to:</p>
+                <label><input type="radio" name="q2" value="a"> Build a website</label>
+                <label><input type="radio" name="q2" value="b"> Help someone with emotional stress</label>
+            </div>
+            <div class="question">
+                <p>3. Which school subject do you like most?</p>
+                <label><input type="radio" name="q3" value="a"> Physics</label>
+                <label><input type="radio" name="q3" value="b"> Psychology</label>
+            </div>
+            <button type="submit">Submit Test</button>
+        </form>
+        <div id="testResult" class="test-result"></div>
+<div style="text-align: center; margin-top: 20px;">
+    <a href="student_dashboard.html">
+        <button style="
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            border: none;
+            padding: 12px 24px;
+            color: white;
+            border-radius: 8px;
+            outline: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        " onmouseover="this.style.transform='scale(1.05)'" 
+          onmouseout="this.style.transform='scale(1)'">
+            ← Back to Dashboard
+        </button>
+    </a>
+</div>
+
+    </div>
+
+    <script src="student-dash.js"></script>
+</body>
+</html>
