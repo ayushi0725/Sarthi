@@ -16,8 +16,9 @@
             </div>
             <nav class="menu-bar">
                 <ul>
-                    <li><a href="#profile"><i class="fas fa-user-circle"></i> My Profile</a></li>
-                    <li><a href="#notifications"><i class="fas fa-bell"></i> Notifications</a></li>
+                    <li><a href="#" onclick="showSection('profile')"><i class="fas fa-user-circle"></i> My Profile</a></li>
+                    <li><a href="#" onclick="showSection('notifications')"><i class="fas fa-bell"></i> Notifications</a></li>
+
                     <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
                     <li><a href="#logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                 </ul>
@@ -29,12 +30,12 @@
         <div class="sidebar">
             <div class="user-info">
                 <img src="counselor-avatar.png" alt="Counselor Avatar" class="avatar">
-                <h3> NAME </h3>
+                <h3 id="counselorName">Welcome</h3>
                 <p class="specialization">Career Specialist</p>
             </div>
             <nav class="sidebar-menu">
                 <ul>
-                    <li><a href="#dashboard" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="counselor_dashboard.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
                     <li><a href="#appointments"><i class="fas fa-calendar-check"></i> Appointments</a></li>
                     <li><a href="#students"><i class="fas fa-users"></i> My Students</a></li>
                     <li><a href="#Message"><i class="fas fa-clipboard-list"></i> Message</a></li>
@@ -44,46 +45,34 @@
         </div>
 
         <div class="main-content">
-            <div class="stats-cards">
-                <div class="card">
-                    <i class="fas fa-users"></i>
-                    <h3>Active Students</h3>
-                    <p>25 Students</p>
+            <section class="profile-section">
+                <h2>My Profile</h2>
+                <form id="counselorProfileForm">
+                    <label>Specialization:</label>
+                    <input type="text" id="specialization" required><br>
+
+                    <label>Experience:</label>
+                    <input type="text" id="experience" required><br>
+
+                    <label>Bio:</label>
+                    <textarea id="bio" required></textarea><br>
+
+                    <button type="submit">Save Profile</button>
+                </form>
+                <div id="noProfileMessage" class="no-profile" style="display: none; text-align: center; padding: 20px;">
+                    <p>You haven't created your profile yet.</p>
+                    <button onclick="showProfileForm()" class="start-session">Create My Profile</button>
                 </div>
-                <div class="card">
-                    <i class="fas fa-calendar-check"></i>
-                    <h3>Today's Sessions</h3>
-                    <p>5 Scheduled</p>
-                </div>
-                <div class="card">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>Progress Reports</h3>
-                    <p>12 Pending</p>
-                </div>
-            </div>
+            </section>
 
             <div class="upcoming-sessions">
                 <h2>Today's Appointments</h2>
-                <div class="session-list">
-                    <div class="session-item">
-                        <div class="time-slot">10:00 AM</div>
-                        <div class="session-info">
-                            <h4>Career Guidance Session</h4>
-                            <p>Student: John Doe</p>
-                            <span>Stream: Engineering</span>
-                        </div>
-                        <button onclick="startSession('session1')" class="start-session">Start Session</button>
-                    </div>
-                    <div class="session-item">
-                        <div class="time-slot">11:30 AM</div>
-                        <div class="session-info">
-                            <h4>Stream Selection Guidance</h4>
-                            <p>Student: Emily Clark</p>
-                            <span>Stream: Science</span>
-                        </div>
-                        <button onclick="startSession('session2')" class="start-session">Start Session</button>
-                    </div>
-                </div>
+                <div id="acceptedContainer"></div>
+            </div>
+
+            <div class="meeting-requests">
+                <h2>Meeting Requests</h2>
+                <div id="requestsContainer"></div>
             </div>
 
             <div class="assessment-review">
@@ -105,29 +94,215 @@
                     </div>
                 </div>
             </div>
+
+            <div class="notifications-section" style="display: none;">
+                <h2>Notifications</h2>
+                <div id="notificationList" class="notification-list"></div>
+            </div>
+            
         </div>
     </section>
 
     <script>
+        function loadNotifications() {
+            const userId = localStorage.getItem('userId');
+            const container = document.getElementById('notificationList');
+            container.innerHTML = '<p>Loading...</p>';
+        
+            fetch(`/api/meetings/counselor/${userId}`)
+                .then(res => res.json())
+                .then(data => {
+                    container.innerHTML = '';
+        
+                    const pendingRequests = data.meetings.filter(m => m.status === 'pending');
+        
+                    if (pendingRequests.length === 0) {
+                        container.innerHTML = '<p>No new notifications.</p>';
+                        return;
+                    }
+        
+                    pendingRequests.forEach(req => {
+                        const item = document.createElement('div');
+                        item.className = 'session-item';
+                        item.innerHTML = `
+                            <div class="session-info">
+                                <h4>${req.message}</h4>
+                                <p><strong>Student:</strong> ${req.student_name}</p>
+                                <span>${req.date_time}</span>
+                            </div>
+                        `;
+        
+                        const acceptBtn = document.createElement('button');
+                        acceptBtn.textContent = 'Accept';
+                        acceptBtn.className = 'start-session';
+                        acceptBtn.onclick = () => respondToMeeting(req.id, 'accepted');
+        
+                        const denyBtn = document.createElement('button');
+                        denyBtn.textContent = 'Deny';
+                        denyBtn.style.marginLeft = '10px';
+                        denyBtn.onclick = () => respondToMeeting(req.id, 'denied');
+        
+                        item.appendChild(acceptBtn);
+                        item.appendChild(denyBtn);
+                        container.appendChild(item);
+                    });
+                });
+        }
+        
+        function showProfileForm() {
+            document.getElementById('noProfileMessage').style.display = 'none';
+            document.querySelector('.profile-section').style.display = 'block';
+        }
+        
+        function showSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.main-content > section, .main-content > div').forEach(el => {
+                el.style.display = 'none';
+            });
+        
+            // Show selected
+            if (section === 'profile') {
+                document.querySelector('.profile-section').style.display = 'block';
+            } else if (section === 'appointments') {
+                document.querySelector('.upcoming-sessions').style.display = 'block';
+            } else if (section === 'requests') {
+                document.querySelector('.meeting-requests').style.display = 'block';
+            } else if (section === 'reviews') {
+                document.querySelector('.assessment-review').style.display = 'block';
+            }
+            else if (section === 'notifications') {
+                document.querySelector('.notifications-section').style.display = 'block';
+                loadNotifications();
+            }
+            
+        }
+        
     function startSession(sessionId) {
-        // Add video call or chat implementation
         window.location.href = `/session-room.html?id=${sessionId}`;
     }
 
     function reviewAssessment(assessmentId) {
-        // Add assessment review implementation
         window.location.href = `/assessment-review.html?id=${assessmentId}`;
     }
 
-    // Add real-time notifications
-    function initializeNotifications() {
-        // Implement WebSocket or polling for real-time updates
-    }
-
-    // Initialize dashboard
     document.addEventListener('DOMContentLoaded', function() {
-        initializeNotifications();
+        const userId = localStorage.getItem('userId');
+        const name = localStorage.getItem('userName');
+        document.getElementById('counselorName').textContent = `Welcome, ${name}`;
+
+        fetch(`/api/counselor/profile/${userId}`)
+    .then(res => res.json())
+    .then(data => {
+        if (data.success && data.profile) {
+            document.getElementById('specialization').value = data.profile.specialization || '';
+            document.getElementById('experience').value = data.profile.experience || '';
+            document.getElementById('bio').value = data.profile.bio || '';
+            document.querySelector('.profile-section').style.display = 'block';
+        } else {
+            document.getElementById('noProfileMessage').style.display = 'block';
+            document.querySelector('.profile-section').style.display = 'none';
+        }
     });
+
+
+    document.getElementById('counselorProfileForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+    
+        const specialization = document.getElementById('specialization').value;
+        const experience = document.getElementById('experience').value;
+        const bio = document.getElementById('bio').value;
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+            alert("No user ID found in localStorage.");
+            window.location.href = "login.html";
+            return;
+        }
+    
+        // First check if profile exists
+        fetch(`/api/counselor/profile/${userId}`)
+            .then(res => res.json())
+            .then(data => {
+                const isExisting = data.success && data.profile;
+                const url = isExisting
+                    ? `/api/counselor/profile/${userId}`   // update
+                    : `/api/counselor/profile`;            // create new
+                const method = isExisting ? 'PUT' : 'POST';
+    
+                fetch(url, {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId, specialization, experience, bio })
+                })
+                .then(res => res.json())
+                .then(data => alert(data.message))
+                .catch(err => {
+                    console.error(err);
+                    alert('Profile submission failed.');
+                });
+            })
+            .catch(err => {
+                console.error(err);
+                alert('Error checking existing profile.');
+            });
+    });
+    
+    // Fetch upcoming and pending meetings
+    fetch(`/api/meetings/counselor/${localStorage.getItem('userId')}`)
+        .then(res => res.json())
+        .then(data => {
+            const reqDiv = document.getElementById('requestsContainer');
+            const acceptedDiv = document.getElementById('acceptedContainer');
+            reqDiv.innerHTML = '';
+            acceptedDiv.innerHTML = '';
+    
+            data.meetings.forEach(req => {
+                const item = document.createElement('div');
+                item.className = 'session-item';
+                item.innerHTML = `
+                    <div class="session-info">
+                        <h4>${req.message}</h4>
+                        <p>Student: ${req.student_name}</p>
+                        <span>${req.date_time}</span>
+                    </div>
+                `;
+    
+                if (req.status === 'pending') {
+                    const acceptBtn = document.createElement('button');
+                    acceptBtn.textContent = 'Accept';
+                    acceptBtn.onclick = () => respondToMeeting(req.id, 'accepted');
+    
+                    const denyBtn = document.createElement('button');
+                    denyBtn.textContent = 'Deny';
+                    denyBtn.onclick = () => respondToMeeting(req.id, 'denied');
+    
+                    item.appendChild(acceptBtn);
+                    item.appendChild(denyBtn);
+                    reqDiv.appendChild(item);
+                } else if (req.status === 'accepted') {
+                    const btn = document.createElement('button');
+                    btn.className = 'start-session';
+                    btn.textContent = 'Start Session';
+                    btn.onclick = () => startSession(req.id);
+                    item.appendChild(btn);
+                    acceptedDiv.appendChild(item);
+                }
+            });
+        });
+    
+    });
+
+    function respondToMeeting(meetingId, status) {
+        fetch('/api/meetings/respond', {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ meetingId, status })
+        })
+        .then(res => res.json())
+        .then(data => {
+            alert(data.message);
+            location.reload();
+        });
+    }
     </script>
 </body>
 </html>
