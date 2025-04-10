@@ -56,6 +56,26 @@ header {
     font-size: 1.2em;
 }
 
+.profile-section {
+    display: none;
+}
+
+.start-session {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    border: none;
+    padding: 12px 24px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.3s ease;
+}
+
+.start-session:hover {
+    transform: scale(1.05);
+}
+
+
 .sidebar-menu ul {
     list-style: none;
     margin-top: 20px;
@@ -83,6 +103,102 @@ header {
 .menu-bar ul li a i {
     font-size: 1.2em;
 }
+
+.notifications-section {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.notification-list .session-item {
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notification-list .session-info h4 {
+    margin: 0 0 5px;
+    font-size: 1.1em;
+}
+
+.notification-list .session-info span {
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+.profile-section {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    color: #fff;
+}
+
+.profile-section h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#counselorProfileForm label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 1em;
+    color: #fff;
+}
+
+#counselorProfileForm input,
+#counselorProfileForm textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 1em;
+    transition: background 0.3s ease;
+}
+
+#counselorProfileForm input:focus,
+#counselorProfileForm textarea:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#counselorProfileForm button {
+    background: linear-gradient(45deg, #2ecc71, #27ae60);
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#counselorProfileForm button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4);
+}
+
+.no-profile p {
+    font-size: 1.1em;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 15px;
+}
+
 
 /* Enhanced test section styling */
 .assessment-section {
