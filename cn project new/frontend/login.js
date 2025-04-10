@@ -1,8 +1,6 @@
-// Wait for the DOM to fully load before attaching event listeners
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('loginBtn').addEventListener('click', login);
 
-    // ✅ Password Toggle Features
     let togglePassword = document.getElementById("togglePassword");
     let passField = document.getElementById("loginPassword");
 
@@ -10,17 +8,20 @@ document.addEventListener("DOMContentLoaded", function () {
         passField.type = passField.type === "password" ? "text" : "password";
     });
 
-    // ✅ Check email existence when email input loses focus
     document.getElementById('loginEmail').addEventListener('blur', checkEmailExists);
 });
 
-// ✅ Function to check if email exists in DB
+// ✅ Dynamic backend IP support
+const backendPort = 3000;
+const backendURL = `http://${window.location.hostname}:${backendPort}`;
+
+// ✅ Function to check if email exists
 async function checkEmailExists() {
     let email = document.getElementById('loginEmail').value.trim();
 
     if (email) {
         try {
-            const response = await fetch('${window.location.origin}/check-email', {
+            const response = await fetch(`${backendURL}/check-email`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email })
@@ -41,16 +42,15 @@ async function checkEmailExists() {
     }
 }
 
-// Login Function
+// ✅ Login Function
 async function login(event) {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault();
 
     let email = document.getElementById('loginEmail').value.trim();
     let password = document.getElementById('loginPassword').value.trim();
 
     let isValid = true;
 
-    // Email Validation
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         document.getElementById('loginEmailError').innerText = 'Enter a valid email';
         isValid = false;
@@ -58,7 +58,6 @@ async function login(event) {
         document.getElementById('loginEmailError').innerText = '';
     }
 
-    // Password Validation
     if (password.length < 8) {
         document.getElementById('loginPasswordError').innerText = 'Password must be at least 8 characters';
         isValid = false;
@@ -68,7 +67,7 @@ async function login(event) {
 
     if (isValid) {
         try {
-            const response = await fetch('http://192.168.91.197:3000/login', {
+            const response = await fetch(`${backendURL}/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
@@ -78,10 +77,12 @@ async function login(event) {
             console.log("Login Response:", data);
 
             if (data.success) {
+                localStorage.setItem('userId', data.userId);  // Make sure this matches server response
+localStorage.setItem('userName', data.name);  // Optional for display
+localStorage.setItem('userStream', data.stream);  // For role-based UI
+
                 alert('Login successful!');
 
-                // Redirect based on user stream
-                console.log("Redirecting to:", data.stream);
                 switch (data.stream) {
                     case "Student":
                         window.location.href = "/student_dashboard.html";
