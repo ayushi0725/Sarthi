@@ -55,11 +55,12 @@
             </div>
 
             <div class="stats-cards">
-                <div class="card">
+                <div class="card" onclick="showAllCounselors()" style="cursor: pointer;">
                     <i class="fas fa-user-tie"></i>
                     <h3>Available Counselors</h3>
                     <p id="counselorCount">0 Online</p>
                 </div>
+                
                 <div class="card">
                     <i class="fas fa-tasks"></i>
                     <h3>Assessments</h3>
@@ -81,7 +82,7 @@
                             <p>Discover your career strengths and interests</p>
                             <span>45 minutes</span>
                         </div>
-                        <button class="start-test" onclick="startTest('aptitude')">Start Test</button>
+                        <div class="aptitude-test-action"></div>
                     </div>
                     <div class="test-item">
                         <div class="test-info">
@@ -120,60 +121,6 @@
         </div>
     </section>
 
-    <script>
-    function searchCounselor() {
-        const searchTerm = document.getElementById('counselorSearch').value.toLowerCase();
-        const resultsDiv = document.getElementById('counselorResults');
-        resultsDiv.innerHTML = ''; // Clear previous results
-    
-        // Sample counselor data (in real app, this would come from backend)
-        const counselors = {
-            'science': [
-                { name: 'Dr. Sarah Johnson', specialization: 'Physics & Engineering', experience: '10 years' },
-                { name: 'Prof. Michael Chen', specialization: 'Biology & Medicine', experience: '8 years' }
-            ],
-            'commerce': [
-                { name: 'Dr. Robert Smith', specialization: 'Finance & Economics', experience: '12 years' },
-                { name: 'Ms. Emily Brown', specialization: 'Business Administration', experience: '7 years' }
-            ],
-            'medical': [
-                { name: 'Dr. Jessica White', specialization: 'Medical Sciences', experience: '15 years' },
-                { name: 'Dr. James Wilson', specialization: 'Healthcare', experience: '9 years' }
-            ]
-        };
-    
-        for (let stream in counselors) {
-            if (stream.includes(searchTerm)) {
-                counselors[stream].forEach(counselor => {
-                    resultsDiv.innerHTML += `
-                        <div class="counselor-card">
-                            <div class="counselor-info">
-                                <h3>${counselor.name}</h3>
-                                <p>${counselor.specialization}</p>
-                                <span>${counselor.experience}</span>
-                            </div>
-                            <button onclick="scheduleMeeting('${counselor.name}')">Schedule Meeting</button>
-                        </div>
-                    `;
-                });
-            }
-        }
-    }
-    
-    function scheduleMeeting(counselorName) {
-        alert(`Scheduling meeting with ${counselorName}`);
-        // Add your scheduling logic here
-    }
-    
-    function startTest(type) {
-        alert(`Starting ${type} test`);
-        // Add your test logic here
-    }
-    
-    function exploreCareer(field) {
-        alert(`Exploring ${field} career path`);
-        // Add your career exploration logic here
-    }
-    </script>
+    <script src="student-dash.js"></script>
 </body>
 </html>
